@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: F1 API (Infinity)
+    type: yesoreyeram-infinity-datasource
+    access: proxy
+    isDefault: true
+    editable: true
+    jsonData:
+      url: http://host.docker.internal:8000  # <-- your FastAPI backend URL
+      allowed_hosts:
+        - host.docker.internal
