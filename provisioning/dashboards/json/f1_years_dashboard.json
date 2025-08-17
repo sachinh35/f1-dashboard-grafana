@@ -5,7 +5,6 @@
     "timezone": "browser",
     "schemaVersion": 36,
     "version": 1,
-    "refresh": "5s",
     "templating": {
         "list": [
             {
@@ -40,6 +39,35 @@
                 "includeAll": false,
                 "multi": false,
                 "sort": 1
+            },
+            {
+                "description": "Select session for which you need metrics",
+                "includeAll": false,
+                "label": "Select Session",
+                "name": "session_key",
+                "options": [],
+                "query": {
+                    "infinityQuery": {
+                        "columns": [],
+                        "filters": [],
+                        "format": "table",
+                        "parser": "jq-backend",
+                        "refId": "variable",
+                        "root_selector": ".all_races | map({ text: (.location + \" - \" + .session_name), value: .session_key })",
+                        "source": "url",
+                        "type": "json",
+                        "url": "http://host.docker.internal:8000/races/${year}",
+                        "url_options": {
+                            "data": "",
+                            "method": "GET"
+                        }
+                    },
+                    "query": "",
+                    "queryType": "infinity"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
             }
         ]
     },
