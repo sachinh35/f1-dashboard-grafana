@@ -41,19 +41,58 @@
                 "sort": 1
             },
             {
-                "description": "Select session for which you need metrics",
-                "includeAll": false,
-                "label": "Select Session",
-                "name": "session_key",
+                "description": "Location of the session. ",
+                "label": "Session Location",
+                "name": "session_location",
                 "options": [],
                 "query": {
                     "infinityQuery": {
                         "columns": [],
                         "filters": [],
                         "format": "table",
-                        "parser": "jq-backend",
+                        "parser": "backend",
                         "refId": "variable",
-                        "root_selector": ".all_races | map({ text: (.location + \" - \" + .session_name), value: .session_key })",
+                        "root_selector": "all_races[*].location",
+                        "source": "url",
+                        "type": "json",
+                        "url": "http://host.docker.internal:8000/races/${year}",
+                        "url_options": {
+                            "data": "",
+                            "method": "GET"
+                        }
+                    },
+                    "query": "",
+                    "queryType": "infinity"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
+            },
+            {
+                "label": "Session Type",
+                "name": "session_key",
+                "options": [],
+                "query": {
+                    "infinityQuery": {
+                        "columns": [
+                            {
+                                "selector": "session_name",
+                                "text": "__text",
+                                "type": "string"
+                            },
+                            {
+                                "selector": "session_key",
+                                "text": "__value",
+                                "type": "string"
+                            }
+                        ],
+                        "computed_columns": [],
+                        "filterExpression": "",
+                        "filters": [],
+                        "format": "table",
+                        "parser": "backend",
+                        "refId": "variable",
+                        "root_selector": "all_races[location=\"${session_location}\"]",
                         "source": "url",
                         "type": "json",
                         "url": "http://host.docker.internal:8000/races/${year}",
