@@ -1,40 +1,47 @@
 {
-  "id": null,
-  "uid": "f1-years",
-  "title": "F1 Available Years",
-  "timezone": "browser",
-  "schemaVersion": 36,
-  "version": 1,
-  "refresh": "5s",
-  "templating": {
-    "list": [
-      {
-        "name": "year",
-        "label": "Select Year",
-        "type": "query",
-        "datasource": {
-          "type": "yesoreyeram-infinity-datasource",
-          "uid": "${INFINITY_UID}"
-        },
-        "query": {
-            "infinityQuery": {
-                "type": "json",
-                "parser": "jq",
-                "source": "url",
-                "url": "http://host.docker.internal:8000/years",
-                "url_options": {
-                    "method": "GET"
+    "id": null,
+    "uid": "f1-years",
+    "title": "F1 Available Years",
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "version": 1,
+    "refresh": "5s",
+    "templating": {
+        "list": [
+            {
+                "name": "year",
+                "label": "Select Year",
+                "type": "query",
+                "datasource": {
+                    "type": "yesoreyeram-infinity-datasource",
+                    "uid": "${INFINITY_UID}"
                 },
-                "filters": [".years_list[]"]
+                "query": {
+                    "infinityQuery": {
+                        "columns": [],
+                        "filters": [],
+                        "format": "table",
+                        "type": "json",
+                        "refId": "variable",
+                        "parser": "jq-backend",
+                        "root_selector": ".years_list",
+                        "source": "url",
+                        "url": "http://host.docker.internal:8000/years",
+                        "url_options": {
+                            "data": "",
+                            "method": "GET"
+                        }
+                    },
+                    "query": "",
+                    "queryType": "infinity"
+                },
+                "refresh": 1,
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "sort": 1
             }
-        },
-        "refresh": 1,
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "sort": 1
-      }
-    ]
-  },
-  "panels": []
+        ]
+    },
+    "panels": []
 }
